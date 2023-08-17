@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, MouseEvent, KeyboardEvent } from "react"
+import { useState, useEffect, useCallback, useMemo, useRef, MouseEvent, KeyboardEvent } from "react"
 
 interface User {
   id: number,
@@ -20,6 +20,13 @@ function App() {
   const [count, setCount] = useState<number>(0)
   const [users, setUsers] = useState<User[] | null>(null)
 
+  const inputRef = useRef<HTMLInputElement>(null) //we could have null! to explicitly tell TypeScript that you are aware that the initial value might be null, but you are asserting that it won't be null during the runtime of your code
+
+  // if (!inputRef.current) // typeof
+
+  console.log(inputRef?.current)
+  console.log(inputRef?.current?.value)
+
   useEffect(() => {
     console.log('mounting')
     console.log('Users: ', users)
@@ -37,6 +44,7 @@ function App() {
       <h1>{count}</h1>
       <button onClick={addTwo}>Add</button>
       <h2>{result}</h2>
+      <input ref={inputRef} type="text"/>
     </div>
   )
 }
