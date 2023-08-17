@@ -1,18 +1,18 @@
-import { Counter } from "./components/Counter"
-import Heading from "./components/Heading"
-import { List } from "./components/List"
-import { Section } from "./components/Section"
 import { useState } from "react"
 
+interface User {
+  id: number,
+  username: string,
+}
+
 function App() {
-  const [count, setCount] = useState<number>(1)
+  // const [count, setCount] = useState<User[]>([])
+  // const [count, setCount] = useState<User>({} as User) // You would only do this if you knew you were going to fill this state very quickly or it could cause some errors 
+  const [count, setCount] = useState<number>(0)
+  const [users, setUsers] = useState<User[] | null>(null)
 
   return (
     <>
-      <Heading title={"Hello"} />
-      <Section title={"Different Title"}>This is my section</Section>
-      <Counter setCount={setCount}>Count is {count}</Counter>
-      <List items={["☕ Coffee", "🌮 Tacos", "💻 Code"]} render={(item: string) => <span className="bold">{item}</span>} />
     </>
   )
 }
