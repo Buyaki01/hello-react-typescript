@@ -1,4 +1,4 @@
-import { createContext, useReducer, ChangeEvent } from "react"
+import { createContext, useReducer, ChangeEvent, ReactElement } from "react"
 
 type StateType = {
   count: number
@@ -52,9 +52,23 @@ type UseCounterContextType = ReturnType<typeof useCounterContext>
 
 const initContextState: UseCounterContextType = {
   state: initState,
-  increment: () => {},
-  decrement: () => {},
-  handleTextInput: (e: ChangeEvent<HTMLInputElement>) => {},
+  increment: () => { },
+  decrement: () => { },
+  handleTextInput: (e: ChangeEvent<HTMLInputElement>) => { },
 }
 
 export const CounterContext = createContext<UseCounterContextType>(initContextState) 
+
+type ChildrenType = {
+  children?: ReactElement | undefined
+}
+
+export const CounterProvider = ({
+  children, ...initState
+}: ChildrenType & StateType): ReactElement => {
+  return (
+    <CounterContext.Provider value={useCounterContext(initState)}>
+      {children}
+    </CounterContext.Provider>
+  )
+}
